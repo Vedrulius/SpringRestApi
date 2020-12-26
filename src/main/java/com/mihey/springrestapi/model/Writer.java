@@ -27,13 +27,8 @@ public class Writer {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
+    @OneToOne(targetEntity = User.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
-    public Writer() {
-    }
-
-    public Writer(String firstName, String lastName, Region region) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.region = region;
-    }
 }

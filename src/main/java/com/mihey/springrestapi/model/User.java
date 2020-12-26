@@ -27,4 +27,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
+    @OneToOne(mappedBy = "user")
+    private Writer writer;
 }
