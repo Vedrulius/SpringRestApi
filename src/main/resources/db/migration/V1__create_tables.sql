@@ -14,11 +14,11 @@ PRIMARY KEY (id)
 );
 
 CREATE TABLE writers (
-id SERIAL,
+user_id SERIAL,
 first_name VARCHAR(40),
 last_name VARCHAR(40),
 region_id INT NOT NULL,
-PRIMARY KEY (id)
+PRIMARY KEY (user_id)
 );
 
 CREATE TABLE posts (
@@ -29,7 +29,7 @@ created TIMESTAMP NOT NULL DEFAULT now(),
 updated TIMESTAMP NOT NULL DEFAULT now(),
 status VARCHAR(15) NOT NULL,
 CONSTRAINT fk_writers FOREIGN KEY (writer_id)
-REFERENCES writers(id)
+REFERENCES writers(user_id)
 ON DELETE CASCADE
 ON UPDATE CASCADE
 );

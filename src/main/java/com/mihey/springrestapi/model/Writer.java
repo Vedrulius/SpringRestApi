@@ -1,6 +1,5 @@
 package com.mihey.springrestapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,7 +16,7 @@ import java.util.List;
 public class Writer {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotBlank(message = "First Name should not be empty")
@@ -33,7 +32,7 @@ public class Writer {
     private Region region;
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
 }
