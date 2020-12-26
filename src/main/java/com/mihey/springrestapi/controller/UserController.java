@@ -1,6 +1,7 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.model.User;
+import com.mihey.springrestapi.model.Writer;
 import com.mihey.springrestapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,11 @@ public class UserController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    @PostMapping("/users")
+    public Writer addWriter(@Valid @RequestBody Writer writer) {
+        return null;
     }
 
     @GetMapping("/users")
