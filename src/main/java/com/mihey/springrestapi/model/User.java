@@ -15,9 +15,9 @@ import javax.validation.constraints.Size;
 @Table(name = "users")
 public class User {
     @Id
-    @NotBlank(message = "Username should not be empty")
     @Column(name = "id")
     private Integer id;
+    @Size(min = 3, max=10,message = "Name should be between 3 and 10")
     @Column(name = "user_name")
     private String userName;
     @Size(min = 6)
