@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@Table(name = "users")
+@Table(name = "writers")
 public class Writer {
 
     @Id
@@ -31,9 +31,8 @@ public class Writer {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
+    @OneToOne(targetEntity = User.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
 }

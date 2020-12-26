@@ -36,11 +36,6 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @PostMapping("/users")
-    public Writer addWriter(@Valid @RequestBody Writer writer) {
-        return null;
-    }
-
     @GetMapping("/users")
     public List<User> getUsers() {
         List<User> users = userRepository.findAll();

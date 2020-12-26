@@ -6,7 +6,7 @@ PRIMARY KEY (id)
 
 CREATE TABLE users (
 id SERIAL,
-user_name VARCHAR(40),
+user_name VARCHAR(40) UNIQUE,
 password VARCHAR(255),
 role VARCHAR(10),
 status VARCHAR(10),
@@ -14,11 +14,15 @@ PRIMARY KEY (id)
 );
 
 CREATE TABLE writers (
-id SERIAL,
+id SERIAL PRIMARY KEY,
+user_id INT NOT NULL,
 first_name VARCHAR(40),
 last_name VARCHAR(40),
 region_id INT NOT NULL,
-PRIMARY KEY (id)
+CONSTRAINT fk_wriers FOREIGN KEY (user_id)
+REFERENCES users(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 CREATE TABLE posts (
