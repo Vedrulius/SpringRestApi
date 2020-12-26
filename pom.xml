@@ -20,6 +20,7 @@
 		<flyway-maven-plugin.version>7.2.1</flyway-maven-plugin.version>
 		<junit.version>4.13.1</junit.version>
 		<mockito-core.version>3.6.0</mockito-core.version>
+		<validation.version>2.0.0.Final</validation.version>
 	</properties>
 
 	<dependencies>
@@ -34,6 +35,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation.version}</version>
 		</dependency>
 
 		<dependency>
@@ -92,7 +99,7 @@
 				<version>${flyway-maven-plugin.version}</version>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<writer>admin</writer>
+					<user>admin</user>
 					<password>admin</password>
 					<url>jdbc:postgresql://localhost/postservice</url>
 				</configuration>
