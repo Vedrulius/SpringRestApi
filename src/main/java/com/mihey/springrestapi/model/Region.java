@@ -21,7 +21,7 @@ public class Region {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
-    private List<User> users;
+    private List<Writer> writers;
 
     public Region() {
     }

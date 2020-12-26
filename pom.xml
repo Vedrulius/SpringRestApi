@@ -92,7 +92,7 @@
 				<version>${flyway-maven-plugin.version}</version>
 				<configuration>
 					<driver>org.postgresql.Driver</driver>
-					<user>admin</user>
+					<writer>admin</writer>
 					<password>admin</password>
 					<url>jdbc:postgresql://localhost/postservice</url>
 				</configuration>

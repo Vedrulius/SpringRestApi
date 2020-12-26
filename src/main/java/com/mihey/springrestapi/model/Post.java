@@ -25,8 +25,8 @@ public class Post {
     @Column(name = "updated")
     private Timestamp updated;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "writer_id")
+    private Writer writer;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private PostStatus status;
@@ -34,8 +34,8 @@ public class Post {
     public Post() {
     }
 
-    public Post(User user, String content) {
-        this.user = user;
+    public Post(Writer writer, String content) {
+        this.writer = writer;
         this.content = content;
         this.created = new Timestamp(System.currentTimeMillis());
         this.updated = new Timestamp(System.currentTimeMillis());
