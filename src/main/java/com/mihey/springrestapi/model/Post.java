@@ -1,5 +1,6 @@
 package com.mihey.springrestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,6 +29,7 @@ public class Post {
     private Timestamp updated;
     @ManyToOne
     @JoinColumn(name = "writer_id")
+    @JsonIgnore
     private Writer writer;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
