@@ -31,8 +31,9 @@ public class Writer {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
-    @OneToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
     private User user;
 
 }
