@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Setter
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 @Table(name = "users")
 public class User {
     @Id
+    @NotBlank(message = "Username should not be empty")
     @Column(name = "id")
     private Integer id;
     @Column(name = "user_name")
