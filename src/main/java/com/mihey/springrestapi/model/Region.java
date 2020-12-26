@@ -1,5 +1,6 @@
 package com.mihey.springrestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,13 +24,7 @@ public class Region {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Writer> writers;
-
-    public Region() {
-    }
-
-    public Region(String name) {
-        this.name = name;
-    }
 
 }

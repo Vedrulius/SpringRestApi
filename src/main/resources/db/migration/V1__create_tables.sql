@@ -14,15 +14,12 @@ PRIMARY KEY (id)
 );
 
 CREATE TABLE writers (
-id SERIAL PRIMARY KEY,
+id SERIAL,
 user_id INT NOT NULL,
 first_name VARCHAR(40),
 last_name VARCHAR(40),
 region_id INT NOT NULL,
-CONSTRAINT fk_users FOREIGN KEY (user_id)
-REFERENCES users(id)
-ON DELETE CASCADE
-ON UPDATE CASCADE
+PRIMARY KEY (id)
 );
 
 CREATE TABLE posts (

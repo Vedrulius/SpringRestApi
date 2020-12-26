@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 public class User {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Size(min = 3, max=10,message = "Name should be between 3 and 10")
     @Column(name = "user_name")
@@ -29,6 +30,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Writer writer;
 }
