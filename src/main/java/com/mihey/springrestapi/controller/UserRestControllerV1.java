@@ -4,6 +4,7 @@ import com.mihey.springrestapi.model.Role;
 import com.mihey.springrestapi.model.Status;
 import com.mihey.springrestapi.model.User;
 import com.mihey.springrestapi.repository.UserRepository;
+import com.mihey.springrestapi.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,16 +20,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-public class UserController {
-
-    public UserController() {
-    }
+public class UserRestControllerV1 {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserServiceImpl userService;
 
     @PostMapping("/api/v1/register")
     public User addUser(@Valid @RequestBody User user) {
@@ -36,10 +34,10 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if(user.getStatus()==null) {
+        if (user.getStatus() == null) {
             user.setStatus(Status.ACTIVE);
         }
-        if(user.getRole()==null) {
+        if (user.getRole() == null) {
             user.setRole(Role.USER);
         }
         return userRepository.save(user);

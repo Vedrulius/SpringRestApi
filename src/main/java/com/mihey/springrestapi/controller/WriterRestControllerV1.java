@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
-public class WriterController {
+public class WriterRestControllerV1 {
 
     @Autowired
     private WriterRepository writerRepository;
