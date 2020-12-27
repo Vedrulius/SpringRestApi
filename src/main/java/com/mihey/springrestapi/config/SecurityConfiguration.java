@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/regions").authenticated()
                 .antMatchers("/api/v1/users").authenticated()
                 .antMatchers("/api/v1/posts").authenticated()
+                .antMatchers("/api/v1/writers").authenticated()
                 .and().headers().frameOptions().disable();
     }
 

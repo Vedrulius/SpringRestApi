@@ -34,8 +34,8 @@ public class PostRestControllerV1 {
 
     @PostMapping("/api/v1/posts")
     public Post addPost(@Valid @RequestBody Post post, Principal user) {
-        Writer w = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
-        post.setWriter(w);
+        Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
+        post.setWriter(writer);
         post.setCreated(new Timestamp(System.currentTimeMillis()));
         post.setUpdated(new Timestamp(System.currentTimeMillis()));
         if (post.getStatus()==null) {
@@ -47,26 +47,29 @@ public class PostRestControllerV1 {
 
 
     @GetMapping("/api/v1/posts")
-    public ResponseEntity<List<Post>> getAllRegions() {
+    public ResponseEntity<List<Post>> getAllPosts() {
         List<Post> posts = postService.getPosts();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/posts/{id}")
-    public ResponseEntity<Post> getRegionById(@PathVariable int id) {
+    public ResponseEntity<Post> getPostById(@PathVariable int id) {
         Post post = postService.getPostById(id);
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-
+    //TODO edit method
     @PutMapping("/api/v1/posts")
-    public ResponseEntity<Post> updateRegion(@RequestBody Post post) {
-        Post post1 = postService.savePost(post);
-        return new ResponseEntity<>(post1, HttpStatus.OK);
+    public ResponseEntity<Post> updatePost(@RequestBody Post post, Principal user) {
+        Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
+        post.setWriter(writer);
+        post.setUpdated(new Timestamp(System.currentTimeMillis()));
+        Post p = postService.savePost(post);
+        return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
     @DeleteMapping("/api/v1/posts/{id}")
-    public ResponseEntity<String> deleteRegionById(@PathVariable int id) {
+    public ResponseEntity<String> deletePostById(@PathVariable int id) {
         postService.deletePostById(id);
         return new ResponseEntity<>("Post successfully deleted", HttpStatus.OK);
     }

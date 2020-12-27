@@ -3,6 +3,7 @@ package com.mihey.springrestapi.service;
 import com.mihey.springrestapi.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
@@ -16,5 +17,5 @@ public interface UserService {
 
     void deleteUserById(Integer id);
 
-
+    Optional<User> findByUserName(String username);
 }
