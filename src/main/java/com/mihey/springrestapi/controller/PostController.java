@@ -25,7 +25,7 @@ public class PostController {
     @Autowired
     private WriterRepository writerRepository;
 
-    @PostMapping("/posts")
+    @PostMapping("/api/v1/posts")
     public Post addPost(@Valid @RequestBody Post post, Principal user) {
         Writer w = writerRepository.findById(userRepository.findByUserName(user.getName()).get().getId()).get();
         post.setWriter(w);

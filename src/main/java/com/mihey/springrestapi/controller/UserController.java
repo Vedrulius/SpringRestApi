@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/register")
+    @PostMapping("/api/v1/register")
     public User addUser(@Valid @RequestBody User user) {
         if (userRepository.findByUserName(user.getUserName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -45,7 +45,7 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/api/v1/users")
     public List<User> getUsers() {
         UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userRepository.findAll();

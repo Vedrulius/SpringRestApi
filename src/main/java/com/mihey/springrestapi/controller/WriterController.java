@@ -26,7 +26,7 @@ public class WriterController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/users")
+    @PostMapping("/api/v1/users")
     public Writer addWriter(@Valid @RequestBody Writer writer, Principal user) {
         writer.setUser(userRepository.findByUserName(user.getName()).get());
         writer.setRegion(regionRepository.save(writer.getRegion()));
