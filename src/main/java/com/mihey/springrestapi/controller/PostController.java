@@ -29,11 +29,11 @@ public class PostController {
     public Post addPost(@Valid @RequestBody Post post, Principal user) {
         Writer w = writerRepository.findById(userRepository.findByUserName(user.getName()).get().getId()).get();
         post.setWriter(w);
-//        post.setCreated(new Timestamp(System.currentTimeMillis()));
-//        post.setUpdated(new Timestamp(System.currentTimeMillis()));
-//        if (post.getStatus()==null) {
-//            post.setStatus(PostStatus.UNDER_REVIEW);
-//        }
+        post.setCreated(new Timestamp(System.currentTimeMillis()));
+        post.setUpdated(new Timestamp(System.currentTimeMillis()));
+        if (post.getStatus()==null) {
+            post.setStatus(PostStatus.UNDER_REVIEW);
+        }
         return postRepository.save(post);
     }
 }

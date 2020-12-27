@@ -1,5 +1,7 @@
 package com.mihey.springrestapi.controller;
 
+import com.mihey.springrestapi.model.Role;
+import com.mihey.springrestapi.model.Status;
 import com.mihey.springrestapi.model.User;
 import com.mihey.springrestapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +36,18 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getStatus()==null) {
+            user.setStatus(Status.ACTIVE);
+        }
+        if(user.getRole()==null) {
+            user.setRole(Role.USER);
+        }
         return userRepository.save(user);
     }
 
     @GetMapping("/users")
     public List<User> getUsers() {
         UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 }
