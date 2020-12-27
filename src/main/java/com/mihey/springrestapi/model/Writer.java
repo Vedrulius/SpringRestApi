@@ -1,5 +1,6 @@
 package com.mihey.springrestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,6 +34,7 @@ public class Writer {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
 }

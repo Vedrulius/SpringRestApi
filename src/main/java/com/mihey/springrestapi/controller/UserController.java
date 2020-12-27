@@ -1,10 +1,11 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.model.User;
-import com.mihey.springrestapi.model.Writer;
 import com.mihey.springrestapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,7 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
+        UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<User> users = userRepository.findAll();
         return users;
     }
