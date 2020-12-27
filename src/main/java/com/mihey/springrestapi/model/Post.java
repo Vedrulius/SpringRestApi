@@ -32,17 +32,7 @@ public class Post {
     @JsonIgnore
     private Writer writer;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "varchar(15) default 'UNDER_REVIEW'")
     private PostStatus status;
-
-    public Post() {
-    }
-
-    public Post(Writer writer, String content) {
-        this.writer = writer;
-        this.content = content;
-        this.created = new Timestamp(System.currentTimeMillis());
-        this.updated = new Timestamp(System.currentTimeMillis());
-    }
 
 }
