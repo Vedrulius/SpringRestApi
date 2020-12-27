@@ -23,9 +23,9 @@ public class Post {
     @NotBlank
     @Column(name = "content")
     private String content;
-    @Column(name = "created")
+    @Column(name = "created", columnDefinition = "timestamp default now()")
     private Timestamp created;
-    @Column(name = "updated")
+    @Column(name = "updated", columnDefinition = "timestamp default now()")
     private Timestamp updated;
     @ManyToOne
     @JoinColumn(name = "writer_id")
