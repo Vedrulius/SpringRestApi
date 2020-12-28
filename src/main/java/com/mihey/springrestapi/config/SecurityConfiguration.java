@@ -1,7 +1,9 @@
 package com.mihey.springrestapi.config;
 
+import com.mihey.springrestapi.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,21 +20,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .httpBasic()
-                .and().authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/api/v1/register").permitAll()
-                .antMatchers("/api/v1/regions").authenticated()
-                .antMatchers("/api/v1/users").authenticated()
-                .antMatchers("/api/v1/posts").authenticated()
-                .antMatchers("/api/v1/writers").authenticated()
-                .and().headers().frameOptions().disable();
+                .antMatchers(HttpMethod.GET, "/api/v1/regions").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/regions").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.PUT, "/api/v1/regions").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.DELETE, "/api/v1/regions").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.GET, "/api/v1/posts").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/posts").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.PUT, "/api/v1/posts").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.DELETE, "/api/v1/posts").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.GET, "/api/v1/writers").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/writers").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.PUT, "/api/v1/writers").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.DELETE, "/api/v1/writers").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.GET, "/api/v1/users").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())
+                .antMatchers(HttpMethod.POST, "/api/v1/users").hasAuthority(Role.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/api/v1/users").hasAuthority(Role.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/api/v1/users").hasAuthority(Role.ADMIN.name())
+                .anyRequest()
+                .authenticated()
+                .and().httpBasic();
     }
 
     @Bean

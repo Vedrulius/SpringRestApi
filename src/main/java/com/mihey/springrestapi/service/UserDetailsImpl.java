@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +26,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(user.getRole().name().split(","))
-                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
     }
 
     @Override
