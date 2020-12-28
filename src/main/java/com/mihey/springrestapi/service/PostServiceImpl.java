@@ -2,7 +2,6 @@ package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.Post;
 import com.mihey.springrestapi.repository.PostRepository;
-import com.mihey.springrestapi.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +24,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post savePost(Post region) {
-        return postRepository.save(region);
+    public Post savePost(Post post) {
+        return postRepository.save(post);
     }
 
     @Override
-    public Post updatePost(Post region) {
-        return postRepository.save(region);
+    public Post updatePost(Post post) {
+        return postRepository.save(post);
     }
 
     @Override

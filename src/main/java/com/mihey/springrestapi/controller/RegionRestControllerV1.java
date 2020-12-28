@@ -34,7 +34,7 @@ public class RegionRestControllerV1 {
 
     @PutMapping("/api/v1/regions")
     public ResponseEntity<Region> updateRegion(@RequestBody Region region) {
-        Region r = regionService.saveRegion(region);
+        Region r = regionService.updateRegion(region);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 

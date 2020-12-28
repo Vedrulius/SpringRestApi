@@ -2,13 +2,9 @@ package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.model.Post;
 import com.mihey.springrestapi.model.PostStatus;
-import com.mihey.springrestapi.model.Region;
 import com.mihey.springrestapi.model.Writer;
-import com.mihey.springrestapi.repository.PostRepository;
 import com.mihey.springrestapi.repository.UserRepository;
-import com.mihey.springrestapi.repository.WriterRepository;
 import com.mihey.springrestapi.service.PostServiceImpl;
-import com.mihey.springrestapi.service.RegionServiceImpl;
 import com.mihey.springrestapi.service.WriterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +29,7 @@ public class PostRestControllerV1 {
 
 
     @PostMapping("/api/v1/posts")
-    public Post addPost(@Valid @RequestBody Post post, Principal user) {
+    public ResponseEntity<Post> addPost(@Valid @RequestBody Post post, Principal user) {
         Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
         post.setWriter(writer);
         post.setCreated(new Timestamp(System.currentTimeMillis()));
@@ -41,7 +37,7 @@ public class PostRestControllerV1 {
         if (post.getStatus()==null) {
             post.setStatus(PostStatus.UNDER_REVIEW);
         }
-        return postService.savePost(post);
+        return new ResponseEntity<>(postService.savePost(post), HttpStatus.OK);
     }
 
 
@@ -64,7 +60,7 @@ public class PostRestControllerV1 {
         Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
         post.setWriter(writer);
         post.setUpdated(new Timestamp(System.currentTimeMillis()));
-        Post p = postService.savePost(post);
+        Post p = postService.updatePost(post);
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
