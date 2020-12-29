@@ -1,4 +1,4 @@
-package com.mihey.springrestapi.service;
+package com.mihey.springrestapi.security;
 
 import com.mihey.springrestapi.model.User;
 import com.mihey.springrestapi.repository.UserRepository;

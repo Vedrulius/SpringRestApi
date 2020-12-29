@@ -1,4 +1,4 @@
-package com.mihey.springrestapi.service;
+package com.mihey.springrestapi.security;
 
 import com.mihey.springrestapi.model.Status;
 import com.mihey.springrestapi.model.User;
@@ -7,10 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsImpl implements UserDetails {
