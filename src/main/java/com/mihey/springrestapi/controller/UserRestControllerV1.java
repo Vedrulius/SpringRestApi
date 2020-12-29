@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 public class UserRestControllerV1 {
 
     @Autowired
@@ -26,7 +27,7 @@ public class UserRestControllerV1 {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping("/api/v1/register")
+    @PostMapping("/register")
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         if (userService.findByUserName(user.getUserName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -41,26 +42,26 @@ public class UserRestControllerV1 {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
         UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
 
     }
 
-    @GetMapping("/api/v1/users/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         User user = userService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping("/api/v1/users")
+    @PutMapping("/users")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User u = userService.updateUser(user);
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/v1/users/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable int id) {
         userService.deleteUserById(id);
         return new ResponseEntity<>("User successfully deleted", HttpStatus.OK);

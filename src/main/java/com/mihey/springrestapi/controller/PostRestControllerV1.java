@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/posts")
 public class PostRestControllerV1 {
 
     @Autowired
@@ -28,7 +29,7 @@ public class PostRestControllerV1 {
     private UserRepository userRepository;
 
 
-    @PostMapping("/api/v1/posts")
+    @PostMapping
     public ResponseEntity<Post> addPost(@Valid @RequestBody Post post, Principal user) {
         Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
         post.setWriter(writer);
@@ -42,20 +43,20 @@ public class PostRestControllerV1 {
 
 
 
-    @GetMapping("/api/v1/posts")
+    @GetMapping
     public ResponseEntity<List<Post>> getAllPosts() {
         List<Post> posts = postService.getPosts();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/posts/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable int id) {
         Post post = postService.getPostById(id);
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
     //TODO edit method
-    @PutMapping("/api/v1/posts")
+    @PutMapping
     public ResponseEntity<Post> updatePost(@RequestBody Post post, Principal user) {
         Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
         post.setWriter(writer);
@@ -64,7 +65,7 @@ public class PostRestControllerV1 {
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/v1/posts/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePostById(@PathVariable int id) {
         postService.deletePostById(id);
         return new ResponseEntity<>("Post successfully deleted", HttpStatus.OK);

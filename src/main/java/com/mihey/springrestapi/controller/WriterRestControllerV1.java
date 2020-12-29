@@ -14,6 +14,7 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/writers")
 public class WriterRestControllerV1 {
 
     @Autowired
@@ -25,32 +26,32 @@ public class WriterRestControllerV1 {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping("/api/v1/writers")
+    @PostMapping
     public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer, Principal user) {
         writer.setUser(userService.findByUserName(user.getName()).get());
         writer.setRegion(regionService.saveRegion(writer.getRegion()));
         return new ResponseEntity<>(writerService.saveWriter(writer),HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/writers")
+    @GetMapping
     public ResponseEntity<List<Writer>> getWriters() {
         List<Writer> writers = writerService.getWriters();
         return new ResponseEntity<>(writers,HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/writers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Writer> getWriterById(@PathVariable int id) {
         Writer writer = writerService.getWriterById(id);
         return new ResponseEntity<>(writer, HttpStatus.OK);
     }
 
-    @PutMapping("/api/v1/writers")
+    @PutMapping
     public ResponseEntity<Writer> updateRegion(@RequestBody Writer writer) {
         Writer w = writerService.updateWriter(writer);
         return new ResponseEntity<>(w, HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/v1/writers/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRegionById(@PathVariable int id) {
         writerService.deleteWriterById(id);
         return new ResponseEntity<>("Writer successfully deleted", HttpStatus.OK);
