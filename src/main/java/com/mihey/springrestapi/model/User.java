@@ -17,7 +17,7 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Size(min = 3, max = 10, message = "Name should be between 3 and 10")
+    @Size(min = 3, max = 30, message = "Name should be between 3 and 30")
     @Column(name = "user_name")
     private String userName;
     @Size(min = 6)
