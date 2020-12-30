@@ -3,8 +3,8 @@ package com.mihey.springrestapi.controller;
 import com.mihey.springrestapi.model.Post;
 import com.mihey.springrestapi.model.PostStatus;
 import com.mihey.springrestapi.model.Writer;
-import com.mihey.springrestapi.repository.UserRepository;
 import com.mihey.springrestapi.service.PostServiceImpl;
+import com.mihey.springrestapi.service.UserService;
 import com.mihey.springrestapi.service.WriterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,28 +20,29 @@ import java.util.List;
 @RequestMapping("/api/v1/posts")
 public class PostRestControllerV1 {
 
-    @Autowired
     private WriterServiceImpl writerService;
-
-    @Autowired
     private PostServiceImpl postService;
+    private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
+    public PostRestControllerV1(WriterServiceImpl writerService, PostServiceImpl postService,
+                                UserService userRepository) {
+        this.writerService = writerService;
+        this.postService = postService;
+        this.userService = userRepository;
+    }
 
     @PostMapping
     public ResponseEntity<Post> addPost(@Valid @RequestBody Post post, Principal user) {
-        Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
+        Writer writer = writerService.getWriterById(userService.findByUserName(user.getName()).get().getId());
         post.setWriter(writer);
         post.setCreated(new Timestamp(System.currentTimeMillis()));
         post.setUpdated(new Timestamp(System.currentTimeMillis()));
-        if (post.getStatus()==null) {
+        if (post.getStatus() == null) {
             post.setStatus(PostStatus.UNDER_REVIEW);
         }
         return new ResponseEntity<>(postService.savePost(post), HttpStatus.OK);
     }
-
 
 
     @GetMapping
@@ -59,7 +60,7 @@ public class PostRestControllerV1 {
     //TODO edit method
     @PutMapping
     public ResponseEntity<Post> updatePost(@RequestBody Post post, Principal user) {
-        Writer writer = writerService.getWriterById(userRepository.findByUserName(user.getName()).get().getId());
+        Writer writer = writerService.getWriterById(userService.findByUserName(user.getName()).get().getId());
         post.setWriter(writer);
         post.setUpdated(new Timestamp(System.currentTimeMillis()));
         Post p = postService.updatePost(post);

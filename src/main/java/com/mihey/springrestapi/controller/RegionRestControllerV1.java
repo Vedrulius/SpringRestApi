@@ -14,8 +14,13 @@ import java.util.List;
 @RequestMapping("/api/v1/regions")
 public class RegionRestControllerV1 {
 
-    @Autowired
+
     private RegionServiceImpl regionService;
+
+    @Autowired
+    public RegionRestControllerV1(RegionServiceImpl regionService) {
+        this.regionService = regionService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Region>> getAllRegions() {

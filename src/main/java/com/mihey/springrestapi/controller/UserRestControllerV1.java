@@ -21,11 +21,14 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class UserRestControllerV1 {
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    private UserServiceImpl userService;
 
     @Autowired
-    private UserServiceImpl userService;
+    public UserRestControllerV1(PasswordEncoder passwordEncoder, UserServiceImpl userService) {
+        this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
