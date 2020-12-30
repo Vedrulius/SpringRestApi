@@ -1,12 +1,13 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.Region;
+import com.mihey.springrestapi.model.dto.RegionDTO;
 
 import java.util.List;
 
 public interface RegionService {
 
-    List<Region> getRegions();
+    List<RegionDTO> getRegionsDTO();
 
     Region getRegionById(Integer id);
 

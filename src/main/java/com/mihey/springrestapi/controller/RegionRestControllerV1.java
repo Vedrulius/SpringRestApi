@@ -1,7 +1,9 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.model.Region;
+import com.mihey.springrestapi.model.dto.RegionDTO;
 import com.mihey.springrestapi.service.RegionServiceImpl;
+import com.mihey.springrestapi.service.mapper.RegionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,8 @@ public class RegionRestControllerV1 {
     }
 
     @GetMapping
-    public ResponseEntity<List<Region>> getAllRegions() {
-        List<Region> regions = regionService.getRegions();
+    public ResponseEntity<List<RegionDTO>> getAllRegions() {
+        List<RegionDTO> regions = regionService.getRegionsDTO();
         return new ResponseEntity<>(regions, HttpStatus.OK);
     }
 

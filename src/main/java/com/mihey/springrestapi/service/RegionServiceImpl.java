@@ -1,7 +1,9 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.Region;
+import com.mihey.springrestapi.model.dto.RegionDTO;
 import com.mihey.springrestapi.repository.RegionRepository;
+import com.mihey.springrestapi.service.mapper.RegionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,17 +12,19 @@ import java.util.List;
 @Service
 public class RegionServiceImpl implements RegionService {
 
+     RegionRepository regionRepository;
 
-    private RegionRepository regionRepository;
+     RegionMapper regionMapper;
 
     @Autowired
-    public RegionServiceImpl(RegionRepository regionRepository) {
+    public RegionServiceImpl(RegionRepository regionRepository, RegionMapper regionMapper) {
         this.regionRepository = regionRepository;
+        this.regionMapper = regionMapper;
     }
 
     @Override
-    public List<Region> getRegions() {
-        return regionRepository.findAll();
+    public List<RegionDTO> getRegionsDTO() {
+        return regionMapper.toDto(regionRepository.findAll());
     }
 
     @Override
