@@ -21,6 +21,7 @@
 		<junit.version>4.13.1</junit.version>
 		<mockito-core.version>3.6.0</mockito-core.version>
 		<validation.version>2.0.0.Final</validation.version>
+		<jsonwebtoken.version>0.9.1</jsonwebtoken.version>
 	</properties>
 
 	<dependencies>
@@ -80,6 +81,12 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jsonwebtoken.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
