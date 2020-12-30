@@ -9,8 +9,13 @@ import java.util.List;
 
 @Service
 public class WriterServiceImpl implements WriterService {
-    @Autowired
+
     private WriterRepository writerRepository;
+
+    @Autowired
+    public WriterServiceImpl(WriterRepository writerRepository) {
+        this.writerRepository = writerRepository;
+    }
 
     @Override
     public List<Writer> getWriters() {

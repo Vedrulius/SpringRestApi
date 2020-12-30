@@ -10,8 +10,13 @@ import java.util.List;
 @Service
 public class RegionServiceImpl implements RegionService {
 
-    @Autowired
+
     private RegionRepository regionRepository;
+
+    @Autowired
+    public RegionServiceImpl(RegionRepository regionRepository) {
+        this.regionRepository = regionRepository;
+    }
 
     @Override
     public List<Region> getRegions() {

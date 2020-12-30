@@ -25,6 +25,7 @@ public class PostRestControllerV1 {
 
     @Autowired
     private PostServiceImpl postService;
+
     @Autowired
     private UserRepository userRepository;
 
