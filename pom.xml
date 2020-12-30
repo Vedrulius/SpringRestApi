@@ -21,6 +21,7 @@
 		<junit.version>4.13.1</junit.version>
 		<mockito-core.version>3.6.0</mockito-core.version>
 		<validation.version>2.0.0.Final</validation.version>
+		<mapstruct.version>1.4.1.Final</mapstruct.version>
 	</properties>
 
 	<dependencies>
@@ -79,6 +80,11 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
 		</dependency>
 	</dependencies>
 
