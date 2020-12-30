@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class RegionServiceImpl implements RegionService {
 
-     RegionRepository regionRepository;
+     private RegionRepository regionRepository;
 
-     RegionMapper regionMapper;
+     private RegionMapper regionMapper;
 
     @Autowired
     public RegionServiceImpl(RegionRepository regionRepository, RegionMapper regionMapper) {
