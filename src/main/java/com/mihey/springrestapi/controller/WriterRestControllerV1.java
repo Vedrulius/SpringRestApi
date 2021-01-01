@@ -1,9 +1,11 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.model.Writer;
+import com.mihey.springrestapi.model.dto.WriterDTO;
 import com.mihey.springrestapi.service.RegionServiceImpl;
 import com.mihey.springrestapi.service.UserServiceImpl;
 import com.mihey.springrestapi.service.WriterServiceImpl;
+import com.mihey.springrestapi.service.mapper.WriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,37 +19,42 @@ import java.util.List;
 @RequestMapping("/api/v1/writers")
 public class WriterRestControllerV1 {
 
-    @Autowired
     private WriterServiceImpl writerService;
-
-    @Autowired
     private RegionServiceImpl regionService;
+    private UserServiceImpl userService;
+    private WriterMapper writerMapper;
 
     @Autowired
-    private UserServiceImpl userService;
+    public WriterRestControllerV1(WriterServiceImpl writerService, RegionServiceImpl regionService,
+                                  UserServiceImpl userService, WriterMapper writerMapper) {
+        this.writerService = writerService;
+        this.regionService = regionService;
+        this.userService = userService;
+        this.writerMapper = writerMapper;
+    }
 
     @PostMapping
-    public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer, Principal user) {
-        writer.setUser(userService.findByUserName(user.getName()).get());
-//        writer.setRegion(regionService.saveRegion(writer.getRegion()));
-        return new ResponseEntity<>(writerService.saveWriter(writer),HttpStatus.OK);
+    public ResponseEntity<WriterDTO> addWriter(@Valid @RequestBody WriterDTO writer, Principal user) {
+        writerMapper.toEntity(writer).setUser(userService.findByUserName(user.getName()).get());
+        writer.setRegion(regionService.saveRegion(writer.getRegion()));
+        return new ResponseEntity<>(writerService.saveWriter(writer), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Writer>> getWriters() {
-        List<Writer> writers = writerService.getWriters();
-        return new ResponseEntity<>(writers,HttpStatus.OK);
+    public ResponseEntity<List<WriterDTO>> getWriters() {
+        List<WriterDTO> writers = writerService.getWriters();
+        return new ResponseEntity<>(writers, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Writer> getWriterById(@PathVariable int id) {
-        Writer writer = writerService.getWriterById(id);
+    public ResponseEntity<WriterDTO> getWriterById(@PathVariable int id) {
+        WriterDTO writer = writerService.getWriterById(id);
         return new ResponseEntity<>(writer, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Writer> updateRegion(@RequestBody Writer writer) {
-        Writer w = writerService.updateWriter(writer);
+    public ResponseEntity<WriterDTO> updateRegion(@RequestBody WriterDTO writer) {
+        WriterDTO w = writerService.updateWriter(writer);
         return new ResponseEntity<>(w, HttpStatus.OK);
     }
 

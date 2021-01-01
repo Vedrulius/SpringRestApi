@@ -1,17 +1,18 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.Writer;
+import com.mihey.springrestapi.model.dto.WriterDTO;
 
 import java.util.List;
 
 public interface WriterService {
-    List<Writer> getWriters();
+    List<WriterDTO> getWriters();
 
-    Writer getWriterById(Integer id);
+    WriterDTO getWriterById(Integer id);
 
-    Writer saveWriter(Writer region);
+    WriterDTO saveWriter(WriterDTO writer);
 
-    Writer updateWriter(Writer region);
+    WriterDTO updateWriter(WriterDTO writer);
 
     void deleteWriterById(Integer id);
 }

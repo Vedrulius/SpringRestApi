@@ -3,7 +3,9 @@ package com.mihey.springrestapi.controller;
 import com.mihey.springrestapi.model.Role;
 import com.mihey.springrestapi.model.Status;
 import com.mihey.springrestapi.model.User;
+import com.mihey.springrestapi.model.dto.UserDTO;
 import com.mihey.springrestapi.service.UserServiceImpl;
+import com.mihey.springrestapi.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +25,18 @@ public class UserRestControllerV1 {
 
     private PasswordEncoder passwordEncoder;
     private UserServiceImpl userService;
+    private UserMapper userMapper;
 
     @Autowired
-    public UserRestControllerV1(PasswordEncoder passwordEncoder, UserServiceImpl userService) {
+    public UserRestControllerV1(PasswordEncoder passwordEncoder, UserServiceImpl userService, UserMapper userMapper) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
-        if (userService.findByUserName(user.getUserName()).isPresent()) {
+    public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO user) {
+        if (userService.findByUserName(userMapper.toEntity(user).getUserName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -46,21 +50,21 @@ public class UserRestControllerV1 {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserDTO>> getUsers() {
         UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
 
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
-        User user = userService.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable int id) {
+        UserDTO user = userService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/users")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-        User u = userService.updateUser(user);
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user) {
+        UserDTO u = userService.updateUser(user);
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
