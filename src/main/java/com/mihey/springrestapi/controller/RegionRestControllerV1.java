@@ -26,24 +26,24 @@ public class RegionRestControllerV1 {
 
     @GetMapping
     public ResponseEntity<List<RegionDTO>> getAllRegions() {
-        List<RegionDTO> regions = regionService.getRegionsDTO();
+        List<RegionDTO> regions = regionService.getRegions();
         return new ResponseEntity<>(regions, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Region> getRegionById(@PathVariable int id) {
-        Region region = regionService.getRegionById(id);
+    public ResponseEntity<RegionDTO> getRegionById(@PathVariable int id) {
+        RegionDTO region = regionService.getRegionById(id);
         return new ResponseEntity<>(region, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Region> saveRegion(@Valid @RequestBody Region region) {
+    public ResponseEntity<RegionDTO> saveRegion(@Valid @RequestBody RegionDTO region) {
         return new ResponseEntity<>(regionService.saveRegion(region), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Region> updateRegion(@RequestBody Region region) {
-        Region r = regionService.updateRegion(region);
+    public ResponseEntity<RegionDTO> updateRegion(@RequestBody RegionDTO region) {
+        RegionDTO r = regionService.updateRegion(region);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
 

@@ -23,23 +23,23 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public List<RegionDTO> getRegionsDTO() {
+    public List<RegionDTO> getRegions() {
         return regionMapper.toDto(regionRepository.findAll());
     }
 
     @Override
-    public Region getRegionById(Integer id) {
-        return regionRepository.findById(id).get();
+    public RegionDTO getRegionById(Integer id) {
+        return regionMapper.toDto(regionRepository.findById(id).get());
     }
 
     @Override
-    public Region saveRegion(Region region) {
-        return regionRepository.save(region);
+    public RegionDTO saveRegion(RegionDTO region) {
+        return regionMapper.toDto(regionRepository.save(regionMapper.toEntity(region)));
     }
 
     @Override
-    public Region updateRegion(Region region) {
-        return regionRepository.save(region);
+    public RegionDTO updateRegion(RegionDTO region) {
+        return regionMapper.toDto(regionRepository.save(regionMapper.toEntity(region)));
     }
 
     @Override

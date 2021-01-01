@@ -29,7 +29,7 @@ public class WriterRestControllerV1 {
     @PostMapping
     public ResponseEntity<Writer> addWriter(@Valid @RequestBody Writer writer, Principal user) {
         writer.setUser(userService.findByUserName(user.getName()).get());
-        writer.setRegion(regionService.saveRegion(writer.getRegion()));
+//        writer.setRegion(regionService.saveRegion(writer.getRegion()));
         return new ResponseEntity<>(writerService.saveWriter(writer),HttpStatus.OK);
     }
 
