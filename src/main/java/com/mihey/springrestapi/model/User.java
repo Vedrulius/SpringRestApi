@@ -19,7 +19,7 @@ public class User {
     private Integer id;
     @Size(min = 3, max = 30, message = "Name should be between 3 and 30")
     @Column(name = "user_name")
-    private String userName;
+    private String username;
     @Size(min = 4)
     @Column(name = "password")
     private String password;
@@ -32,4 +32,5 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Writer writer;
+
 }

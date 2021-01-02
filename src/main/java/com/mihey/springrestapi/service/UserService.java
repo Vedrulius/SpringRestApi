@@ -1,19 +1,20 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.User;
+import com.mihey.springrestapi.model.dto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    List<User> getUsers();
+    List<UserDTO> getUsers();
 
-    User getUserById(Integer id);
+    UserDTO getUserById(Integer id);
 
-    User saveUser(User region);
+    UserDTO saveUser(UserDTO user);
 
-    User updateUser(User region);
+    UserDTO updateUser(UserDTO user);
 
     void deleteUserById(Integer id);
 

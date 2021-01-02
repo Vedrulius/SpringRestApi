@@ -1,7 +1,9 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.Writer;
+import com.mihey.springrestapi.model.dto.WriterDTO;
 import com.mihey.springrestapi.repository.WriterRepository;
+import com.mihey.springrestapi.service.mapper.WriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,30 +13,32 @@ import java.util.List;
 public class WriterServiceImpl implements WriterService {
 
     private WriterRepository writerRepository;
+    private WriterMapper writerMapper;
 
     @Autowired
-    public WriterServiceImpl(WriterRepository writerRepository) {
+    public WriterServiceImpl(WriterRepository writerRepository,WriterMapper writerMapper) {
         this.writerRepository = writerRepository;
+        this.writerMapper = writerMapper;
     }
 
     @Override
-    public List<Writer> getWriters() {
-        return writerRepository.findAll();
+    public List<WriterDTO> getWriters() {
+        return writerMapper.toDto(writerRepository.findAll());
     }
 
     @Override
-    public Writer getWriterById(Integer id) {
-        return writerRepository.findById(id).get();
+    public WriterDTO getWriterById(Integer id) {
+        return writerMapper.toDto(writerRepository.findById(id).get());
     }
 
     @Override
-    public Writer saveWriter(Writer region) {
-        return writerRepository.save(region);
+    public WriterDTO saveWriter(WriterDTO writer) {
+        return writerMapper.toDto(writerRepository.save(writerMapper.toEntity(writer)));
     }
 
     @Override
-    public Writer updateWriter(Writer region) {
-        return writerRepository.save(region);
+    public WriterDTO updateWriter(WriterDTO writer) {
+        return writerMapper.toDto(writerRepository.save(writerMapper.toEntity(writer)));
     }
 
     @Override
