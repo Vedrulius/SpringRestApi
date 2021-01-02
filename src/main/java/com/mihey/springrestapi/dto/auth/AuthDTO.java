@@ -1,4 +1,4 @@
-package com.mihey.springrestapi.controller.authentication;
+package com.mihey.springrestapi.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;

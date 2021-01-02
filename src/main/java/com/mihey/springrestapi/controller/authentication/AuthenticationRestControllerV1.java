@@ -1,5 +1,6 @@
 package com.mihey.springrestapi.controller.authentication;
 
+import com.mihey.springrestapi.dto.auth.AuthDTO;
 import com.mihey.springrestapi.model.User;
 import com.mihey.springrestapi.repository.UserRepository;
 import com.mihey.springrestapi.security.jwt.JwtTokenProvider;
