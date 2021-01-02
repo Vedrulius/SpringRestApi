@@ -33,7 +33,7 @@ public class UserRestControllerV1 {
     @PostMapping("/register")
     public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         if (userService.findByUserName(user.getUserName()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getStatus() == null) {

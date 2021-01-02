@@ -7,13 +7,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 
+@Component
 public class JwtTokenProvider {
 
 
@@ -39,7 +40,7 @@ public class JwtTokenProvider {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("role", role);
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityTime / 1000);
+        Date validity = new Date(now.getTime() + validityTime * 1000);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)

@@ -20,7 +20,7 @@ public class User {
     @Size(min = 3, max = 30, message = "Name should be between 3 and 30")
     @Column(name = "user_name")
     private String userName;
-    @Size(min = 6)
+    @Size(min = 4)
     @Column(name = "password")
     private String password;
     @Enumerated(EnumType.STRING)
