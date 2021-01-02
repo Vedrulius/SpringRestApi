@@ -1,6 +1,5 @@
 package com.mihey.springrestapi.model.dto;
 
-import com.mihey.springrestapi.model.Region;
 import lombok.Getter;
 import lombok.Setter;
 

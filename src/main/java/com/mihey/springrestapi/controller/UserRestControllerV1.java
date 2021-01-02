@@ -37,7 +37,7 @@ public class UserRestControllerV1 {
     @PostMapping("/register")
     public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO user) {
         if (userService.findByUserName(userMapper.toEntity(user).getUserName()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getStatus() == null) {

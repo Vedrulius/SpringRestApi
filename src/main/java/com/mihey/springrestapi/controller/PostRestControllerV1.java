@@ -4,10 +4,12 @@ import com.mihey.springrestapi.model.Post;
 import com.mihey.springrestapi.model.PostStatus;
 import com.mihey.springrestapi.model.Writer;
 import com.mihey.springrestapi.model.dto.PostDTO;
+import com.mihey.springrestapi.model.dto.WriterDTO;
 import com.mihey.springrestapi.service.PostServiceImpl;
 import com.mihey.springrestapi.service.UserService;
 import com.mihey.springrestapi.service.WriterServiceImpl;
 import com.mihey.springrestapi.service.mapper.PostMapper;
+import com.mihey.springrestapi.service.mapper.WriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,21 +28,25 @@ public class PostRestControllerV1 {
     private PostServiceImpl postService;
     private UserService userService;
     private PostMapper postMapper;
+    private WriterMapper writerMapper;
 
     @Autowired
     public PostRestControllerV1(WriterServiceImpl writerService, PostServiceImpl postService,
-                                UserService userRepository, PostMapper postMapper) {
+                                UserService userRepository, PostMapper postMapper, WriterMapper writerMapper) {
         this.writerService = writerService;
         this.postService = postService;
         this.userService = userRepository;
         this.postMapper = postMapper;
+        this.writerMapper = writerMapper;
     }
 
-    @PostMapping //TODO edit method
+    @PostMapping
     public ResponseEntity<PostDTO> addPost(@Valid @RequestBody PostDTO post, Principal user) {
-//        Writer writer = writerService.getWriterById(userService.findByUserName(user.getName()).get().getId());
-//        post.setWriter(writer);
+        Writer writer = writerMapper.toEntity(writerService.getWriterById(
+                userService.findByUserName(user.getName()).get().getId()));
+
         Post p = postMapper.toEntity(post);
+        p.setWriter(writer);
         p.setCreated(new Timestamp(System.currentTimeMillis()));
         p.setUpdated(new Timestamp(System.currentTimeMillis()));
         if (p.getStatus() == null) {
@@ -61,12 +67,12 @@ public class PostRestControllerV1 {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
-    //TODO edit method
     @PutMapping
     public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO post, Principal user) {
-//        Writer writer = writerService.getWriterById(userService.findByUserName(user.getName()).get().getId());
+        Writer writer = writerMapper.toEntity(writerService.getWriterById(
+                userService.findByUserName(user.getName()).get().getId()));
         Post p = postMapper.toEntity(post);
-//        post.setWriter(writer);
+        p.setWriter(writer);
         p.setUpdated(new Timestamp(System.currentTimeMillis()));
         return new ResponseEntity<>(postService.updatePost(postMapper.toDto(p)), HttpStatus.OK);
     }
