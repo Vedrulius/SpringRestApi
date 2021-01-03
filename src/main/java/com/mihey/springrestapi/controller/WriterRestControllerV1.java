@@ -1,6 +1,6 @@
 package com.mihey.springrestapi.controller;
 
-import com.mihey.springrestapi.model.dto.WriterDTO;
+import com.mihey.springrestapi.dto.WriterDTO;
 import com.mihey.springrestapi.service.RegionServiceImpl;
 import com.mihey.springrestapi.service.UserServiceImpl;
 import com.mihey.springrestapi.service.WriterServiceImpl;

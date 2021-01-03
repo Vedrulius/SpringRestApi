@@ -3,7 +3,7 @@ package com.mihey.springrestapi.controller;
 import com.mihey.springrestapi.model.Post;
 import com.mihey.springrestapi.model.PostStatus;
 import com.mihey.springrestapi.model.Writer;
-import com.mihey.springrestapi.model.dto.PostDTO;
+import com.mihey.springrestapi.dto.PostDTO;
 import com.mihey.springrestapi.service.PostServiceImpl;
 import com.mihey.springrestapi.service.UserService;
 import com.mihey.springrestapi.service.WriterServiceImpl;

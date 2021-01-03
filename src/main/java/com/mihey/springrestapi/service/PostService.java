@@ -1,7 +1,6 @@
 package com.mihey.springrestapi.service;
 
-import com.mihey.springrestapi.model.Post;
-import com.mihey.springrestapi.model.dto.PostDTO;
+import com.mihey.springrestapi.dto.PostDTO;
 
 import java.util.List;
 

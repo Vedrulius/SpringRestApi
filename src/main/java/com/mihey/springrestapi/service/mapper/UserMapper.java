@@ -1,7 +1,7 @@
 package com.mihey.springrestapi.service.mapper;
 
 import com.mihey.springrestapi.model.User;
-import com.mihey.springrestapi.model.dto.UserDTO;
+import com.mihey.springrestapi.dto.UserDTO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;

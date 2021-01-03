@@ -1,7 +1,7 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.User;
-import com.mihey.springrestapi.model.dto.UserDTO;
+import com.mihey.springrestapi.dto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;

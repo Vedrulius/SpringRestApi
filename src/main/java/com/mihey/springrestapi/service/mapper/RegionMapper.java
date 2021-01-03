@@ -1,7 +1,7 @@
 package com.mihey.springrestapi.service.mapper;
 
 import com.mihey.springrestapi.model.Region;
-import com.mihey.springrestapi.model.dto.RegionDTO;
+import com.mihey.springrestapi.dto.RegionDTO;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Service;

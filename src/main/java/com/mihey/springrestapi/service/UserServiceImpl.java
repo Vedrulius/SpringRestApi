@@ -1,7 +1,7 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.model.User;
-import com.mihey.springrestapi.model.dto.UserDTO;
+import com.mihey.springrestapi.dto.UserDTO;
 import com.mihey.springrestapi.repository.UserRepository;
 import com.mihey.springrestapi.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

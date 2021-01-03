@@ -1,7 +1,6 @@
 package com.mihey.springrestapi.service;
 
-import com.mihey.springrestapi.model.Writer;
-import com.mihey.springrestapi.model.dto.WriterDTO;
+import com.mihey.springrestapi.dto.WriterDTO;
 
 import java.util.List;
 

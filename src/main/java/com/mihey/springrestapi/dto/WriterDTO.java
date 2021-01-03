@@ -1,4 +1,4 @@
-package com.mihey.springrestapi.model.dto;
+package com.mihey.springrestapi.dto;
 
 import lombok.Getter;
 import lombok.Setter;

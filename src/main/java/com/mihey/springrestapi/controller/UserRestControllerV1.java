@@ -2,7 +2,7 @@ package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.model.Role;
 import com.mihey.springrestapi.model.Status;
-import com.mihey.springrestapi.model.dto.UserDTO;
+import com.mihey.springrestapi.dto.UserDTO;
 import com.mihey.springrestapi.service.UserServiceImpl;
 import com.mihey.springrestapi.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.mihey.springrestapi.service;
 
-import com.mihey.springrestapi.model.Post;
-import com.mihey.springrestapi.model.dto.PostDTO;
+import com.mihey.springrestapi.dto.PostDTO;
 import com.mihey.springrestapi.repository.PostRepository;
 import com.mihey.springrestapi.service.mapper.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
