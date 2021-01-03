@@ -17,7 +17,7 @@ import java.io.IOException;
 @Component
 public class JwtTokenFilter extends GenericFilterBean {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private  JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
