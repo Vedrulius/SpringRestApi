@@ -35,11 +35,11 @@ public class UserRestControllerV1 {
     @PostMapping("/register")
     public ResponseEntity<UserDTO> addUser(@Valid @RequestBody UserDTO user) {
         if (userService.findByUserName(userMapper.toEntity(user).getUsername()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User exists");
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (user.getStatus() == null) {
-            user.setStatus(Status.ACTIVE);
+            user.setStatus(Status.CONFIRMATION_REQUIRED);
         }
         if (user.getRole() == null) {
             user.setRole(Role.USER);
