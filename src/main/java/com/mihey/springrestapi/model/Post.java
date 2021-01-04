@@ -32,7 +32,7 @@ public class Post {
     @JsonIgnore
     private Writer writer;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "varchar(15) default 'UNDER_REVIEW'")
-    private PostStatus status;
+    @Column(name = "status")
+    private PostStatus status=PostStatus.UNDER_REVIEW;
 
 }

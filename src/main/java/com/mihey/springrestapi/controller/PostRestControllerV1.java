@@ -1,9 +1,8 @@
 package com.mihey.springrestapi.controller;
 
-import com.mihey.springrestapi.model.Post;
-import com.mihey.springrestapi.model.PostStatus;
-import com.mihey.springrestapi.model.Writer;
 import com.mihey.springrestapi.dto.PostDTO;
+import com.mihey.springrestapi.model.Post;
+import com.mihey.springrestapi.model.Writer;
 import com.mihey.springrestapi.service.PostServiceImpl;
 import com.mihey.springrestapi.service.UserService;
 import com.mihey.springrestapi.service.WriterServiceImpl;
@@ -46,11 +45,6 @@ public class PostRestControllerV1 {
 
         Post p = postMapper.toEntity(post);
         p.setWriter(writer);
-        p.setCreated(new Timestamp(System.currentTimeMillis()));
-        p.setUpdated(new Timestamp(System.currentTimeMillis()));
-        if (p.getStatus() == null) {
-            p.setStatus(PostStatus.UNDER_REVIEW);
-        }
         return new ResponseEntity<>(postService.savePost(postMapper.toDto(p)), HttpStatus.OK);
     }
 

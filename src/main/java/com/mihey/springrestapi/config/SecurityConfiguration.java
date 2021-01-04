@@ -30,6 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/v1/register").permitAll()
+                .antMatchers("/api/v1/verify").permitAll()
                 .antMatchers("/api/v1/auth/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/regions").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/v1/regions").hasAnyAuthority(Role.ADMIN.name(), Role.MODERATOR.name())

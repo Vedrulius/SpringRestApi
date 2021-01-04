@@ -12,8 +12,9 @@ import java.sql.Timestamp;
 public class PostDTO {
     private Integer id;
     private String content;
-    private Timestamp updated;
+    private Timestamp created = new Timestamp(System.currentTimeMillis());
+    private Timestamp updated = new Timestamp(System.currentTimeMillis());
+    private PostStatus postStatus = PostStatus.UNDER_REVIEW;
     private Writer writer;
-    private PostStatus postStatus;
 
 }

@@ -27,10 +27,10 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", columnDefinition = "varchar(10) default 'USER")
+    @Column(name = "role")
     private Role role;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "varchar(10) default 'ACTIVE")
+    @Column(name = "status")
     private Status status;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
