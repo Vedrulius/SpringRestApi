@@ -23,7 +23,7 @@ import javax.validation.Valid;
 public class RegisterRestControllerV1 {
 
     private static final String ACCOUNT_SID = "AC108504357e43517c2dca0384798f49fc";
-    private static final String AUTH_TOKEN = "866abfd2262f783622160f608d437637";
+    private static final String AUTH_TOKEN = "944a418a111b75e5aae988d3dec506cd";
     private static final String VERIFICATION_SID = "VAbc26608ae1f68f0d9c97c2ad26fae9e5";
 
     private final PasswordEncoder passwordEncoder;
