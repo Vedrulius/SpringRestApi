@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
 import java.util.Date;
 
 @Component
@@ -27,7 +26,7 @@ public class JwtTokenProvider {
     private SecretKey key;
     @Value("${jwt.header}")
     private String authorizationHeader;
-    @Value("${jwt.expiration}")
+//    @Value("${jwt.expiration}")
     private long validityTime;
 
     public JwtTokenProvider(UserDetailsService userDetailsService) {

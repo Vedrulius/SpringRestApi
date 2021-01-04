@@ -23,6 +23,9 @@ public class User {
     @Size(min = 4)
     @Column(name = "password")
     private String password;
+    @Size(min = 12)
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", columnDefinition = "varchar(10) default 'USER")
     private Role role;
