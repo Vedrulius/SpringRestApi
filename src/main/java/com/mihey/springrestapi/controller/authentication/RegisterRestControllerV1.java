@@ -51,11 +51,8 @@ public class RegisterRestControllerV1 {
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestParam String code, @RequestBody UserDTO user) {
         User u = userService.findByUserName(userMapper.toEntity(user).getUsername()).orElseThrow(() -> new UsernameNotFoundException(user.getUsername()));
-        System.out.println(code);
-        System.out.println(u.toString());
         VerificationCheck verificationCheck = VerificationCheck.creator(VERIFICATION_SID, code)
                 .setTo(user.getPhoneNumber()).create();
-        System.out.println(verificationCheck.toString());
         if (verificationCheck.getStatus().equals("approved")) {
             u.setStatus(Status.ACTIVE);
             return new ResponseEntity<>(userService.updateUser(userMapper.toDto(u)), HttpStatus.OK);
