@@ -9,6 +9,7 @@ import com.twilio.Twilio;
 import com.twilio.rest.verify.v2.service.Verification;
 import com.twilio.rest.verify.v2.service.VerificationCheck;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,9 +23,13 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1")
 public class RegisterRestControllerV1 {
 
-    private static final String ACCOUNT_SID = "AC108504357e43517c2dca0384798f49fc";
-    private static final String AUTH_TOKEN = "944a418a111b75e5aae988d3dec506cd";
-    private static final String VERIFICATION_SID = "VAbc26608ae1f68f0d9c97c2ad26fae9e5";
+
+    @Value("${accountSid}")
+    private String ACCOUNT_SID;
+    @Value("${authToken}")
+    private String AUTH_TOKEN;
+    @Value("${verificationSid}")
+    private String VERIFICATION_SID;
 
     private final PasswordEncoder passwordEncoder;
     private final UserServiceImpl userService;
