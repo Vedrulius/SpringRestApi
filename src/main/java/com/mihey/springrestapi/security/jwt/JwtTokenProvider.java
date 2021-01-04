@@ -20,13 +20,12 @@ import java.util.Date;
 public class JwtTokenProvider {
 
 
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     private String secretKey;
-    private SecretKey key;
     @Value("${jwt.header}")
     private String authorizationHeader;
-//    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration}")
     private long validityTime;
 
     public JwtTokenProvider(UserDetailsService userDetailsService) {

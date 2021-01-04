@@ -1,7 +1,6 @@
 package com.mihey.springrestapi.controller.authentication;
 
 import com.mihey.springrestapi.dto.UserDTO;
-import com.mihey.springrestapi.model.Role;
 import com.mihey.springrestapi.model.Status;
 import com.mihey.springrestapi.model.User;
 import com.mihey.springrestapi.service.UserServiceImpl;
