@@ -1,6 +1,8 @@
 package com.mihey.springrestapi.security.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Encoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
@@ -20,8 +23,8 @@ public class JwtTokenProvider {
 
     private UserDetailsService userDetailsService;
 
-    @Value("${jwt.secret}")
     private String secretKey;
+    private SecretKey key;
     @Value("${jwt.header}")
     private String authorizationHeader;
     @Value("${jwt.expiration}")
@@ -33,7 +36,8 @@ public class JwtTokenProvider {
 
     @PostConstruct
     protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        secretKey = Encoders.BASE64.encode(key.getEncoded());
     }
 
     public String createToken(String username, String role) {
