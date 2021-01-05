@@ -11,9 +11,9 @@ import java.util.List;
 @Service
 public class RegionServiceImpl implements RegionService {
 
-     private RegionRepository regionRepository;
+    private final RegionRepository regionRepository;
 
-     private RegionMapper regionMapper;
+    private final RegionMapper regionMapper;
 
     @Autowired
     public RegionServiceImpl(RegionRepository regionRepository, RegionMapper regionMapper) {
@@ -43,6 +43,8 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     public void deleteRegionById(Integer id) {
-        regionRepository.deleteById(id);
+        if (regionRepository.existsById(id)) {
+            regionRepository.deleteById(id);
+        }
     }
 }

@@ -11,8 +11,8 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    private PostRepository postRepository;
-    private PostMapper postMapper;
+    private final PostRepository postRepository;
+    private final PostMapper postMapper;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
@@ -45,6 +45,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void deletePostById(Integer id) {
-        postRepository.deleteById(id);
+        if (postRepository.existsById(id)) {
+            postRepository.deleteById(id);
+        }
     }
 }

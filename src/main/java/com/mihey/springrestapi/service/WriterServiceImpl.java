@@ -11,11 +11,11 @@ import java.util.List;
 @Service
 public class WriterServiceImpl implements WriterService {
 
-    private WriterRepository writerRepository;
-    private WriterMapper writerMapper;
+    private final WriterRepository writerRepository;
+    private final WriterMapper writerMapper;
 
     @Autowired
-    public WriterServiceImpl(WriterRepository writerRepository,WriterMapper writerMapper) {
+    public WriterServiceImpl(WriterRepository writerRepository, WriterMapper writerMapper) {
         this.writerRepository = writerRepository;
         this.writerMapper = writerMapper;
     }
@@ -42,6 +42,8 @@ public class WriterServiceImpl implements WriterService {
 
     @Override
     public void deleteWriterById(Integer id) {
-        writerRepository.deleteById(id);
+        if (writerRepository.existsById(id)) {
+            writerRepository.deleteById(id);
+        }
     }
 }
