@@ -23,14 +23,6 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1")
 public class RegisterRestControllerV1 {
 
-
-    @Value("${accountSid}")
-    private String ACCOUNT_SID;
-    @Value("${authToken}")
-    private String AUTH_TOKEN;
-    @Value("${verificationSid}")
-    private String VERIFICATION_SID;
-
     private final PasswordEncoder passwordEncoder;
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
@@ -48,15 +40,14 @@ public class RegisterRestControllerV1 {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        Verification verification = Verification.creator(VERIFICATION_SID, user.getPhoneNumber(), "sms").create();
+        Verification verification = Verification.creator("VERIFICATION_SID", user.getPhoneNumber(), "sms").create();
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
     }
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestParam String code, @RequestBody UserDTO user) {
         User u = userService.findByUserName(userMapper.toEntity(user).getUsername()).orElseThrow(() -> new UsernameNotFoundException(user.getUsername()));
-        VerificationCheck verificationCheck = VerificationCheck.creator(VERIFICATION_SID, code)
+        VerificationCheck verificationCheck = VerificationCheck.creator("VERIFICATION_SID", code)
                 .setTo(user.getPhoneNumber()).create();
         if (verificationCheck.getStatus().equals("approved")) {
             u.setStatus(Status.ACTIVE);
