@@ -30,7 +30,6 @@ public class TwilioVerification implements VerificationService {
 
     public void sendSms(String phoneNumber, Code code){
         MessageCreator creator = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber(TWILIO_NUMBER), code.getCode());
+        creator.create();
     }
-
-
 }

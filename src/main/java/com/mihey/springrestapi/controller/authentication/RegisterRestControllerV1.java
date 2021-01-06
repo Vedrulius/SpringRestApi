@@ -1,15 +1,13 @@
 package com.mihey.springrestapi.controller.authentication;
 
 import com.mihey.springrestapi.dto.UserDTO;
-import com.mihey.springrestapi.model.Status;
+import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.model.User;
+import com.mihey.springrestapi.repository.CodeRepository;
+import com.mihey.springrestapi.service.TwilioVerification;
 import com.mihey.springrestapi.service.UserServiceImpl;
 import com.mihey.springrestapi.service.mapper.UserMapper;
-import com.twilio.Twilio;
-import com.twilio.rest.verify.v2.service.Verification;
-import com.twilio.rest.verify.v2.service.VerificationCheck;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,12 +24,18 @@ public class RegisterRestControllerV1 {
     private final PasswordEncoder passwordEncoder;
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
+    private final TwilioVerification twilioVerification;
+    private final CodeRepository codeRepository;
 
     @Autowired
-    public RegisterRestControllerV1(PasswordEncoder passwordEncoder, UserServiceImpl userService, UserMapper userMapper) {
+    public RegisterRestControllerV1(PasswordEncoder passwordEncoder, UserServiceImpl userService,
+                                    UserMapper userMapper, TwilioVerification twilioVerification,
+                                    CodeRepository codeRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.userMapper = userMapper;
+        this.twilioVerification = twilioVerification;
+        this.codeRepository = codeRepository;
     }
 
     @PostMapping("/register")
@@ -40,7 +44,11 @@ public class RegisterRestControllerV1 {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
+        UserDTO userDto=userService.saveUser(user);
+        Code code=new Code(userMapper.toEntity(userDto));
+//        codeRepository.save(code);
+        twilioVerification.sendSms(user.getPhoneNumber(), code);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
     @PostMapping("/verify")
