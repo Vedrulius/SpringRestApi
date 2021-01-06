@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -20,7 +21,7 @@ public class Code {
     private Integer userId;
     @Column(name = "code")
     private String code;
-    @Column(name="is_confirmed")
+    @Column(name = "is_confirmed")
     private boolean isConfirmed = false;
     @Column(name = "created")
     private Timestamp created = new Timestamp(System.currentTimeMillis());
@@ -35,5 +36,12 @@ public class Code {
 
     public Code(User user) {
         this.user = user;
+        this.code = createCode();
     }
+
+    private String createCode() {
+        Random random = new Random();
+        return String.valueOf(random.nextInt(100_000 - 10_000) + 10_000);
+    }
+
 }

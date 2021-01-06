@@ -1,7 +1,9 @@
 package com.mihey.springrestapi.service;
 
+import com.mihey.springrestapi.model.Code;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,11 +28,9 @@ public class TwilioVerification implements VerificationService {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
     }
 
-    public void sendSms(String phoneNumber){
-        Message.creator(new PhoneNumber(phoneNumber),new PhoneNumber(TWILIO_NUMBER), createCode());
+    public void sendSms(String phoneNumber, Code code){
+        MessageCreator creator = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber(TWILIO_NUMBER), code.getCode());
     }
 
-    private String createCode() {
-        return null;
-    }
+
 }
