@@ -30,4 +30,10 @@ public class Code {
     @JsonIgnore
     private User user;
 
+    public Code() {
+    }
+
+    public Code(User user) {
+        this.user = user;
+    }
 }
