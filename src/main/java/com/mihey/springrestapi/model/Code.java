@@ -17,7 +17,6 @@ import java.util.Random;
 public class Code {
     @Id
     @Column(name = "user_id")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     @Column(name = "code")
     private String code;

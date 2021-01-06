@@ -1,6 +1,7 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.dto.CodeDTO;
+import com.mihey.springrestapi.model.Code;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface CodeService {
 
     CodeDTO saveCode(CodeDTO region);
 
-    CodeDTO updateCode(CodeDTO code);
+    Code updateCode(Code code);
 
     void deleteCodeById(Integer id);
 }

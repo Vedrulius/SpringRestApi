@@ -16,14 +16,16 @@ import org.springframework.stereotype.Service;
 public class TwilioVerification implements VerificationService {
 
     private final UserService userService;
+    private final CodeService codeService;
     private final String TWILIO_NUMBER;
     private final String VALIDATION_TIME;
 
 
     @Autowired
     public TwilioVerification(@Value("${accountSid}") String accountSid, @Value("${authToken}") String authToken,
-                              UserService userService, @Value("${twilioNumber}") String twilioNumber, @Value("${validationTime}") String validationTime) {
+                              UserService userService, CodeService codeService, @Value("${twilioNumber}") String twilioNumber, @Value("${validationTime}") String validationTime) {
         this.userService = userService;
+        this.codeService = codeService;
         TWILIO_NUMBER = twilioNumber;
         VALIDATION_TIME = validationTime;
         Twilio.init(accountSid, authToken);
@@ -46,6 +48,8 @@ public class TwilioVerification implements VerificationService {
         } else {
             user.setStatus(Status.ACTIVE);
             userService.saveUser(user);
+            user.getCode().setConfirmed(true);
+            codeService.updateCode(user.getCode());
             return new ResponseEntity<>("Code verified successfully! User status is :" + user.getStatus(), HttpStatus.OK);
         }
     }

@@ -1,6 +1,7 @@
 package com.mihey.springrestapi.service;
 
 import com.mihey.springrestapi.dto.CodeDTO;
+import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.repository.CodeRepository;
 import com.mihey.springrestapi.service.mapper.CodeMapper;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,8 @@ public class CodeServiceImpl implements CodeService {
     }
 
     @Override
-    public CodeDTO updateCode(CodeDTO region) {
-        return codeMapper.toDto(codeRepository.save(codeMapper.toEntity(region)));
+    public Code updateCode(Code code) {
+        return codeRepository.save(code);
     }
 
     @Override
