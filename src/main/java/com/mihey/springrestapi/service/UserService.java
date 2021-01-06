@@ -12,7 +12,7 @@ public interface UserService {
 
     UserDTO getUserById(Integer id);
 
-    UserDTO saveUser(UserDTO user);
+    User saveUser(User user);
 
     UserDTO updateUser(UserDTO user);
 

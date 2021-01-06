@@ -1,5 +1,6 @@
 package com.mihey.springrestapi.dto;
 
+import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.model.Role;
 import com.mihey.springrestapi.model.Status;
 import lombok.Getter;

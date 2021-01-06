@@ -1,5 +1,6 @@
 package com.mihey.springrestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -31,12 +32,13 @@ public class User {
     private Role role;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private Status status = Status.CONFIRMATION_REQUIRED;
+    private Status status;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Writer writer;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private Code code;
 
 }

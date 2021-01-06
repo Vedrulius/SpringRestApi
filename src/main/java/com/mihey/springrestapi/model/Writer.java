@@ -17,7 +17,6 @@ public class Writer {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotBlank(message = "First Name should not be empty")
     @Column(name = "first_name")

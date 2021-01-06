@@ -17,7 +17,7 @@ import java.util.Random;
 public class Code {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     @Column(name = "code")
     private String code;
@@ -31,11 +31,8 @@ public class Code {
     @JsonIgnore
     private User user;
 
-    public Code() {
-    }
 
-    public Code(User user) {
-        this.user = user;
+    public Code() {
         this.code = createCode();
     }
 

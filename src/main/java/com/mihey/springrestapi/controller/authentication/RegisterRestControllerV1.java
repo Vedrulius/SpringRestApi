@@ -3,7 +3,7 @@ package com.mihey.springrestapi.controller.authentication;
 import com.mihey.springrestapi.dto.UserDTO;
 import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.model.User;
-import com.mihey.springrestapi.repository.CodeRepository;
+import com.mihey.springrestapi.repository.UserRepository;
 import com.mihey.springrestapi.service.TwilioVerification;
 import com.mihey.springrestapi.service.UserServiceImpl;
 import com.mihey.springrestapi.service.mapper.UserMapper;
@@ -25,17 +25,14 @@ public class RegisterRestControllerV1 {
     private final UserServiceImpl userService;
     private final UserMapper userMapper;
     private final TwilioVerification twilioVerification;
-    private final CodeRepository codeRepository;
 
     @Autowired
     public RegisterRestControllerV1(PasswordEncoder passwordEncoder, UserServiceImpl userService,
-                                    UserMapper userMapper, TwilioVerification twilioVerification,
-                                    CodeRepository codeRepository) {
+                                    UserMapper userMapper, TwilioVerification twilioVerification) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.userMapper = userMapper;
         this.twilioVerification = twilioVerification;
-        this.codeRepository = codeRepository;
     }
 
     @PostMapping("/register")
@@ -44,11 +41,13 @@ public class RegisterRestControllerV1 {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        UserDTO userDto=userService.saveUser(user);
-        Code code=new Code(userMapper.toEntity(userDto));
-//        codeRepository.save(code);
+        User u = userMapper.toEntity(user);
+        Code code = new Code();
+        u.setCode(code);
+        code.setUser(u);
+        userService.saveUser(u);
         twilioVerification.sendSms(user.getPhoneNumber(), code);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+        return new ResponseEntity<>(userMapper.toDto(u), HttpStatus.OK);
     }
 
     @PostMapping("/verify")
