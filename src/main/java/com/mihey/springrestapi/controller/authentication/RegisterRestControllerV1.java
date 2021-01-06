@@ -40,19 +40,13 @@ public class RegisterRestControllerV1 {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Verification verification = Verification.creator("VERIFICATION_SID", user.getPhoneNumber(), "sms").create();
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
     }
 
     @PostMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestParam String code, @RequestBody UserDTO user) {
         User u = userService.findByUserName(userMapper.toEntity(user).getUsername()).orElseThrow(() -> new UsernameNotFoundException(user.getUsername()));
-        VerificationCheck verificationCheck = VerificationCheck.creator("VERIFICATION_SID", code)
-                .setTo(user.getPhoneNumber()).create();
-        if (verificationCheck.getStatus().equals("approved")) {
-            u.setStatus(Status.ACTIVE);
-            return new ResponseEntity<>(userService.updateUser(userMapper.toDto(u)), HttpStatus.OK);
-        }
+
         return new ResponseEntity<>("Invalid code", HttpStatus.BAD_REQUEST);
     }
 }

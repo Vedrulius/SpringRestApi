@@ -4,13 +4,13 @@ name VARCHAR(40) NOT NULL UNIQUE,
 PRIMARY KEY (id)
 );
 
---CREATE TABLE codes (
---user_id SERIAL,
---code VARCHAR(5) NOT NULL,
---is_confirmed BOOLEAN NOT NULL DEFAULT FALSE,
---created TIMESTAMP DEFAULT now(),
---PRIMARY KEY (user_id)
---);
+CREATE TABLE codes (
+user_id SERIAL,
+code VARCHAR(5) NOT NULL,
+is_confirmed BOOLEAN NOT NULL DEFAULT FALSE,
+created TIMESTAMP DEFAULT now(),
+PRIMARY KEY (user_id)
+);
 
 CREATE TABLE users (
 id SERIAL,
