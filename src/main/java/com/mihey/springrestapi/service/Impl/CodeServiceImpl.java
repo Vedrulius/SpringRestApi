@@ -1,6 +1,5 @@
 package com.mihey.springrestapi.service.Impl;
 
-import com.mihey.springrestapi.dto.CodeDTO;
 import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.repository.CodeRepository;
 import com.mihey.springrestapi.service.CodeService;
@@ -22,18 +21,18 @@ public class CodeServiceImpl implements CodeService {
     }
 
     @Override
-    public List<CodeDTO> getCodes() {
-        return codeMapper.toDto(codeRepository.findAll());
+    public List<Code> getCodes() {
+        return codeRepository.findAll();
     }
 
     @Override
-    public CodeDTO getCodeById(Integer id) {
-        return codeMapper.toDto(codeRepository.findById(id).get());
+    public Code getCodeById(Integer id) {
+        return codeRepository.findById(id).get();
     }
 
     @Override
-    public CodeDTO saveCode(CodeDTO code) {
-        return codeMapper.toDto(codeRepository.save(codeMapper.toEntity(code)));
+    public Code saveCode(Code code) {
+        return codeRepository.save(code);
     }
 
     @Override

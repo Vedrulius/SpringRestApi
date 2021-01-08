@@ -1,6 +1,6 @@
 package com.mihey.springrestapi.service.Impl;
 
-import com.mihey.springrestapi.dto.RegionDTO;
+import com.mihey.springrestapi.model.Region;
 import com.mihey.springrestapi.repository.RegionRepository;
 import com.mihey.springrestapi.service.RegionService;
 import com.mihey.springrestapi.service.mapper.RegionMapper;
@@ -14,32 +14,29 @@ public class RegionServiceImpl implements RegionService {
 
     private final RegionRepository regionRepository;
 
-    private final RegionMapper regionMapper;
-
     @Autowired
     public RegionServiceImpl(RegionRepository regionRepository, RegionMapper regionMapper) {
         this.regionRepository = regionRepository;
-        this.regionMapper = regionMapper;
     }
 
     @Override
-    public List<RegionDTO> getRegions() {
-        return regionMapper.toDto(regionRepository.findAll());
+    public List<Region> getRegions() {
+        return regionRepository.findAll();
     }
 
     @Override
-    public RegionDTO getRegionById(Integer id) {
-        return regionMapper.toDto(regionRepository.findById(id).get());
+    public Region getRegionById(Integer id) {
+        return regionRepository.findById(id).get();
     }
 
     @Override
-    public RegionDTO saveRegion(RegionDTO region) {
-        return regionMapper.toDto(regionRepository.save(regionMapper.toEntity(region)));
+    public Region saveRegion(Region region) {
+        return regionRepository.save(region);
     }
 
     @Override
-    public RegionDTO updateRegion(RegionDTO region) {
-        return regionMapper.toDto(regionRepository.save(regionMapper.toEntity(region)));
+    public Region updateRegion(Region region) {
+        return regionRepository.save(region);
     }
 
     @Override

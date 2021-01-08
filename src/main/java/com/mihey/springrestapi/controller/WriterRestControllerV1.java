@@ -1,6 +1,7 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.dto.WriterDTO;
+import com.mihey.springrestapi.model.Writer;
 import com.mihey.springrestapi.service.Impl.RegionServiceImpl;
 import com.mihey.springrestapi.service.Impl.UserServiceImpl;
 import com.mihey.springrestapi.service.Impl.WriterServiceImpl;
@@ -34,26 +35,28 @@ public class WriterRestControllerV1 {
 
     @PostMapping
     public ResponseEntity<WriterDTO> addWriter(@Valid @RequestBody WriterDTO writer, Principal user) {
-        writerMapper.toEntity(writer).setUser(userService.findByUserName(user.getName()).get());
-        writer.setRegion(regionService.saveRegion(writer.getRegion()));
-        return new ResponseEntity<>(writerService.saveWriter(writer), HttpStatus.OK);
+        Writer w = writerMapper.toEntity(writer);
+        w.setUser(userService.findByUserName(user.getName()).get());
+        w.setRegion(regionService.saveRegion(w.getRegion()));
+        writerService.saveWriter(w);
+        return new ResponseEntity<>(writerMapper.toDto(w), HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<WriterDTO>> getWriters() {
-        List<WriterDTO> writers = writerService.getWriters();
+        List<WriterDTO> writers = writerMapper.toDto(writerService.getWriters());
         return new ResponseEntity<>(writers, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<WriterDTO> getWriterById(@PathVariable int id) {
-        WriterDTO writer = writerService.getWriterById(id);
+        WriterDTO writer = writerMapper.toDto(writerService.getWriterById(id));
         return new ResponseEntity<>(writer, HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<WriterDTO> updateRegion(@RequestBody WriterDTO writer) {
-        WriterDTO w = writerService.updateWriter(writer);
+        WriterDTO w = writerMapper.toDto(writerService.updateWriter(writerMapper.toEntity(writer)));
         return new ResponseEntity<>(w, HttpStatus.OK);
     }
 

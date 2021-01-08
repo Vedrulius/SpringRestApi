@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface UserService {
 
-    List<UserDTO> getUsers();
+    List<User> getUsers();
 
-    UserDTO getUserById(Integer id);
+    User getUserById(Integer id);
 
     User saveUser(User user);
 
-    UserDTO updateUser(UserDTO user);
+    User updateUser(User user);
 
     void deleteUserById(Integer id);
 

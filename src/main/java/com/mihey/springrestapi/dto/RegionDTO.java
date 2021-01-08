@@ -8,7 +8,6 @@ import javax.persistence.Id;
 @Getter
 @Setter
 public class RegionDTO {
-    @Id
     private Integer id;
     private String name;
 }

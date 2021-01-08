@@ -40,34 +40,35 @@ public class PostRestControllerV1 {
 
     @PostMapping
     public ResponseEntity<PostDTO> addPost(@Valid @RequestBody PostDTO post, Principal user) {
-        Writer writer = writerMapper.toEntity(writerService.getWriterById(
-                userService.findByUserName(user.getName()).get().getId()));
+        Writer writer = writerService.getWriterById(
+                userService.findByUserName(user.getName()).get().getId());
 
         Post p = postMapper.toEntity(post);
         p.setWriter(writer);
-        return new ResponseEntity<>(postService.savePost(postMapper.toDto(p)), HttpStatus.OK);
+        post = postMapper.toDto(postService.savePost(p));
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<PostDTO>> getAllPosts() {
-        List<PostDTO> posts = postService.getPosts();
+        List<PostDTO> posts = postMapper.toDto(postService.getPosts());
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostDTO> getPostById(@PathVariable int id) {
-        PostDTO post = postService.getPostById(id);
+        PostDTO post = postMapper.toDto(postService.getPostById(id));
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<PostDTO> updatePost(@RequestBody PostDTO post, Principal user) {
-        Writer writer = writerMapper.toEntity(writerService.getWriterById(
-                userService.findByUserName(user.getName()).get().getId()));
+        Writer writer = writerService.getWriterById(
+                userService.findByUserName(user.getName()).get().getId());
         Post p = postMapper.toEntity(post);
         p.setWriter(writer);
         p.setUpdated(new Timestamp(System.currentTimeMillis()));
-        return new ResponseEntity<>(postService.updatePost(postMapper.toDto(p)), HttpStatus.OK);
+        return new ResponseEntity<>(postMapper.toDto(postService.updatePost(p)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

@@ -1,18 +1,18 @@
 package com.mihey.springrestapi.service;
 
-import com.mihey.springrestapi.dto.PostDTO;
+import com.mihey.springrestapi.model.Post;
 
 import java.util.List;
 
 public interface PostService {
 
-    List<PostDTO> getPosts();
+    List<Post> getPosts();
 
-    PostDTO getPostById(Integer id);
+    Post getPostById(Integer id);
 
-    PostDTO savePost(PostDTO post);
+    Post savePost(Post post);
 
-    PostDTO updatePost(PostDTO post);
+    Post updatePost(Post post);
 
     void deletePostById(Integer id);
 }

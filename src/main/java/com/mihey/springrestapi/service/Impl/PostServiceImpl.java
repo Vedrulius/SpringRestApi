@@ -1,6 +1,6 @@
 package com.mihey.springrestapi.service.Impl;
 
-import com.mihey.springrestapi.dto.PostDTO;
+import com.mihey.springrestapi.model.Post;
 import com.mihey.springrestapi.repository.PostRepository;
 import com.mihey.springrestapi.service.PostService;
 import com.mihey.springrestapi.service.mapper.PostMapper;
@@ -13,35 +13,33 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private final PostMapper postMapper;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
         this.postRepository = postRepository;
-        this.postMapper = postMapper;
     }
 
     @Override
-    public List<PostDTO> getPosts() {
-        return postMapper.toDto(postRepository.findAll());
+    public List<Post> getPosts() {
+        return postRepository.findAll();
     }
 
     @Override
-    public PostDTO getPostById(Integer id) {
+    public Post getPostById(Integer id) {
 
-        return postMapper.toDto(postRepository.findById(id).get());
+        return postRepository.findById(id).get();
     }
 
     @Override
-    public PostDTO savePost(PostDTO post) {
+    public Post savePost(Post post) {
 
-        return postMapper.toDto(postRepository.save(postMapper.toEntity(post)));
+        return postRepository.save(post);
     }
 
     @Override
-    public PostDTO updatePost(PostDTO post) {
+    public Post updatePost(Post post) {
 
-        return postMapper.toDto(postRepository.save(postMapper.toEntity(post)));
+        return postRepository.save(post);
     }
 
     @Override

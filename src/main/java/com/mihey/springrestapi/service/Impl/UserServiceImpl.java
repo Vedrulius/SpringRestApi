@@ -15,22 +15,20 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
     }
 
     @Override
-    public List<UserDTO> getUsers() {
-        return userMapper.toDto(userRepository.findAll());
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     @Override
-    public UserDTO getUserById(Integer id) {
-        return userMapper.toDto(userRepository.findById(id).get());
+    public User getUserById(Integer id) {
+        return userRepository.findById(id).get();
     }
 
     @Override
@@ -38,14 +36,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-//    @Override
-//    public UserDTO saveUser(UserDTO user) {
-//        return userMapper.toDto(userRepository.save(userMapper.toEntity(user)));
-//    }
-
     @Override
-    public UserDTO updateUser(UserDTO user) {
-        return userMapper.toDto(userRepository.save(userMapper.toEntity(user)));
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
