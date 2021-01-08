@@ -1,7 +1,8 @@
-package com.mihey.springrestapi.service;
+package com.mihey.springrestapi.service.Impl;
 
 import com.mihey.springrestapi.dto.RegionDTO;
 import com.mihey.springrestapi.repository.RegionRepository;
+import com.mihey.springrestapi.service.RegionService;
 import com.mihey.springrestapi.service.mapper.RegionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

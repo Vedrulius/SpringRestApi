@@ -1,11 +1,11 @@
-package com.mihey.springrestapi.controller.authentication;
+package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.dto.UserDTO;
 import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.model.User;
-import com.mihey.springrestapi.service.CodeServiceImpl;
-import com.mihey.springrestapi.service.TwilioVerification;
-import com.mihey.springrestapi.service.UserServiceImpl;
+import com.mihey.springrestapi.service.Impl.CodeServiceImpl;
+import com.mihey.springrestapi.service.Impl.TwilioVerification;
+import com.mihey.springrestapi.service.Impl.UserServiceImpl;
 import com.mihey.springrestapi.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

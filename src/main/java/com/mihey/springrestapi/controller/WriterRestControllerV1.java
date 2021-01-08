@@ -1,9 +1,9 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.dto.WriterDTO;
-import com.mihey.springrestapi.service.RegionServiceImpl;
-import com.mihey.springrestapi.service.UserServiceImpl;
-import com.mihey.springrestapi.service.WriterServiceImpl;
+import com.mihey.springrestapi.service.Impl.RegionServiceImpl;
+import com.mihey.springrestapi.service.Impl.UserServiceImpl;
+import com.mihey.springrestapi.service.Impl.WriterServiceImpl;
 import com.mihey.springrestapi.service.mapper.WriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,8 +1,9 @@
-package com.mihey.springrestapi.service;
+package com.mihey.springrestapi.service.Impl;
 
 import com.mihey.springrestapi.dto.CodeDTO;
 import com.mihey.springrestapi.model.Code;
 import com.mihey.springrestapi.repository.CodeRepository;
+import com.mihey.springrestapi.service.CodeService;
 import com.mihey.springrestapi.service.mapper.CodeMapper;
 import org.springframework.stereotype.Service;
 

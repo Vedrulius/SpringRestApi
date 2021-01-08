@@ -1,4 +1,4 @@
-package com.mihey.springrestapi.controller.authentication;
+package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.dto.auth.AuthDTO;
 import com.mihey.springrestapi.model.User;

@@ -1,7 +1,7 @@
 package com.mihey.springrestapi.controller;
 
 import com.mihey.springrestapi.dto.UserDTO;
-import com.mihey.springrestapi.service.UserServiceImpl;
+import com.mihey.springrestapi.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

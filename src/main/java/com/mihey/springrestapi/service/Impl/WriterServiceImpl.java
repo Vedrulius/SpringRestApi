@@ -1,7 +1,8 @@
-package com.mihey.springrestapi.service;
+package com.mihey.springrestapi.service.Impl;
 
 import com.mihey.springrestapi.dto.WriterDTO;
 import com.mihey.springrestapi.repository.WriterRepository;
+import com.mihey.springrestapi.service.WriterService;
 import com.mihey.springrestapi.service.mapper.WriterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
