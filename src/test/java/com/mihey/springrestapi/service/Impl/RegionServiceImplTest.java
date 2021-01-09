@@ -72,4 +72,6 @@ class RegionServiceImplTest {
         Mockito.doNothing().when(regionRepository).deleteById(anyInt());
         regionService.deleteRegionById(1);
     }
+
+
 }
